@@ -1,17 +1,18 @@
-# backend
-backend/venv/
-backend/__pycache__/
-*.pyc
-*.pyo
+# Python bytecode
+**/__pycache__/
+**/*.py[cod]
+*.so
 
+# VE
+venv/
+env/
+**/venv/
+**/env/
 
-# frontend
-frontend/node_modules/
-frontend/.next/
-frontend/.env.local
-
-
-# common
+# Env
 .env
-__pycache__
-*.log
+**/.env
+
+# others
+.vscode/
+
