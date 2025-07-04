@@ -54,4 +54,16 @@ def verify_email_token(token:str)->str:
         raise HTTPException(status_code=400, detail="Invalid or expired token")
     
     
-    
+def create_password_reset_token(user_email: str):
+    expire = datetime.now(timezone.utc)+timedelta(minutes=10)
+    payload = {"sub": str(user_email), "exp": expire}
+    encoded_jwt = jwt.encode(payload, settings.JWT_SECRET_KEY, algorithm=ALGORITHM)
+    return encoded_jwt
+
+
+def verify_password_reset_token(token:str)->str:
+    try:
+        payload=jwt.decode(token,SECRET_KEY, algorithms=[ALGORITHM])
+        return payload["sub"]
+    except JWTError:
+        raise HTTPException(status_code=400, detail="Invalid or expired token")
